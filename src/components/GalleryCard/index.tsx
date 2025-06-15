@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 interface Props {
   src: string;
+  onClick?: () => void;
 }
 
-const GalleryCard: React.FC<Props> = ({ src }) => {
+const GalleryCard: React.FC<Props> = ({ src, onClick }) => {
   return (
-    <div className="group relative overflow-hidden rounded-lg aspect-square">
+    <div
+      onClick={onClick}
+      className="group relative overflow-hidden rounded-lg aspect-square"
+    >
       <img
         src={src}
         alt="Concert crowd"
