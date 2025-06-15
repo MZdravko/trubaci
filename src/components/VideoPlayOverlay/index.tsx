@@ -52,14 +52,14 @@ function VideoPlayOverlay() {
       {open &&
         createPortal(
           <div
-            className="video-overlay fixed inset-0 bg-black/70 bg-opacity-80 z-50 flex items-center justify-center px-5 py-20"
+            className="absolute size-full inset-0 bg-black/70 z-50 flex items-center justify-center px-5 py-20"
             onClick={closeVideo}
           >
             <iframe
               allowFullScreen
               src="https://www.youtube.com/embed/AzOjU2oQS7o?si=2zxLnkdwnMtAuyHJ&autoplay=1"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              className="shadow-2xl flex-1 aspect-video"
+              className="border-0 w-full aspect-video h-auto max-h-full max-w-[1200px]"
             />
           </div>,
           document.body
