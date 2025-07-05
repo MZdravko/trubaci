@@ -1,48 +1,15 @@
 "use client";
 
-import { AwardCard, GalleryCard } from "@/components";
-import ImagePreviewModal from "@/components/ImagePreviewModal";
-import VideoPlayOverlay from "@/components/VideoPlayOverlay";
-import { useClickOutside } from "@/hooks";
-import cn from "@/lib/cn";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type Section = "pocetna" | "o_nama" | "galerija" | "kontakt";
+import { AwardCard } from "@/components";
+import VideoPlayOverlay from "@/components/VideoPlayOverlay";
+import { useClickOutside } from "@/hooks";
+import Gallery from "@/layouts/Gallery";
+import cn from "@/lib/cn";
 
-const galleryImages = [
-  "/images/gallery/1.webp",
-  "/images/gallery/2.webp",
-  "/images/gallery/3.webp",
-  "/images/gallery/4.webp",
-  "/images/gallery/5.webp",
-  "/images/gallery/6.webp",
-  "/images/gallery/7.webp",
-  "/images/gallery/8.webp",
-  "/images/gallery/9.webp",
-  "/images/gallery/10.webp",
-  "/images/gallery/11.webp",
-  "/images/gallery/12.webp",
-  "/images/gallery/13.webp",
-  "/images/gallery/14.webp",
-  "/images/gallery/15.webp",
-  "/images/gallery/16.webp",
-  "/images/gallery/17.webp",
-  "/images/gallery/18.webp",
-  "/images/gallery/19.webp",
-  "/images/gallery/20.webp",
-  "/images/gallery/21.webp",
-  "/images/gallery/22.webp",
-  "/images/gallery/23.webp",
-  "/images/gallery/24.webp",
-  "/images/gallery/25.webp",
-  "/images/gallery/26.webp",
-  "/images/gallery/27.webp",
-  "/images/gallery/28.webp",
-  "/images/gallery/29.webp",
-  "/images/gallery/30.webp",
-  "/images/gallery/31.webp",
-];
+type Section = "pocetna" | "o_nama" | "galerija" | "kontakt";
 
 const sections: Array<{ id: Section; label: string }> = [
   {
@@ -82,26 +49,7 @@ export default function Home() {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
   const [activeSection, setActiveSection] = useState<Section>("pocetna");
 
-  const [imagePreviewSrc, setImagePreviewSrc] = useState("");
-
   const mobileMenuRef = useClickOutside(() => setIsOpenMobileMenu(false));
-
-  const handleImagePreviewNavigation = (nextImage: boolean) => {
-    const currentImgIndex = galleryImages.findIndex(
-      (img) => img === imagePreviewSrc
-    );
-
-    let nextImgIndex = null;
-
-    if (nextImage) {
-      nextImgIndex = (currentImgIndex + 1) % galleryImages.length;
-    } else {
-      nextImgIndex =
-        (currentImgIndex - 1 + galleryImages.length) % galleryImages.length;
-    }
-
-    setImagePreviewSrc(galleryImages[nextImgIndex]);
-  };
 
   useEffect(() => {
     document.getElementById(`#${activeSection}`)?.scrollIntoView({
@@ -320,35 +268,7 @@ export default function Home() {
 
         <div className="min-h-[300px] hidden sm:block parallax grayscale bg-[url(https://beogradtrubaci.com/logo/trubaci-beograd.jpg)]" />
 
-        <section id="#galerija" className="py-20 bg-black">
-          <div className="container mx-auto px-6">
-            <div className="text-center text-white mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mt-4 uppercase text-primary">
-                Galerija
-              </h2>
-              <p className="max-w-2xl mx-auto mt-6 text-lg">
-                Vizuelno putovanje kroz naše najupečatljivije događaje
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {galleryImages.map((imgSrc) => (
-                <GalleryCard
-                  onClick={() => setImagePreviewSrc(imgSrc)}
-                  key={imgSrc}
-                  src={imgSrc}
-                />
-              ))}
-              <ImagePreviewModal
-                src={imagePreviewSrc}
-                showModal={!!imagePreviewSrc}
-                onClose={() => setImagePreviewSrc("")}
-                onNext={() => handleImagePreviewNavigation(true)}
-                onPrev={() => handleImagePreviewNavigation(false)}
-              />
-            </div>
-          </div>
-        </section>
+        <Gallery />
       </main>
 
       <footer
