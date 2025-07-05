@@ -376,7 +376,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-4">
               <Image
-                src="/images/instagram.png"
+                src="/images/instagram.webp"
                 width={40}
                 height={40}
                 alt="insta logo"
@@ -390,7 +390,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-4">
               <Image
-                src="/images/youtube.png"
+                src="/images/youtube.webp"
                 width={40}
                 height={30}
                 alt="insta logo"
