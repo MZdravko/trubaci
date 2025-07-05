@@ -380,6 +380,7 @@ export default function Home() {
                 width={40}
                 height={40}
                 alt="insta logo"
+                unoptimized
               />
               <a
                 className="font-semibold underline"
