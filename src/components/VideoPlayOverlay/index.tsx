@@ -6,6 +6,7 @@ function VideoPlayOverlay() {
   const [open, setOpen] = useState(false);
 
   const openVideo = (e: any) => {
+    console.log("openVideo");
     e.preventDefault();
     setOpen(true);
   };
@@ -33,17 +34,22 @@ function VideoPlayOverlay() {
 
   return (
     <div className="relative">
-      <button onClick={openVideo} className="micro text-white cursor-pointer">
+      <button
+        onClick={openVideo}
+        onTouchStart={openVideo}
+        className="micro text-white cursor-pointer"
+      >
         <svg
-          fill="none"
+          width="24"
           height="24"
+          fill="none"
+          strokeWidth="2"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="2"
-          width="24"
           className="relative left-0.5"
-          xmlns="http://www.w3.org/2000/svg"
+          onClick={openVideo}
+          onTouchStart={openVideo}
         >
           <path d="m5 3 14 9-14 9V3z" />
         </svg>

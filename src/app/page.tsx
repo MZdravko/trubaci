@@ -8,6 +8,8 @@ import cn from "@/lib/cn";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+type Section = "pocetna" | "o_nama" | "galerija" | "kontakt";
+
 const galleryImages = [
   "/images/gallery/1.webp",
   "/images/gallery/2.webp",
@@ -41,8 +43,6 @@ const galleryImages = [
   "/images/gallery/30.webp",
   "/images/gallery/31.webp",
 ];
-
-type Section = "pocetna" | "o_nama" | "galerija" | "kontakt";
 
 const sections: Array<{ id: Section; label: string }> = [
   {
@@ -105,8 +105,8 @@ export default function Home() {
 
   useEffect(() => {
     document.getElementById(`#${activeSection}`)?.scrollIntoView({
-      behavior: "smooth", // optional: 'auto' or 'smooth'
-      block: "start", // optional: 'start', 'center', 'end', or 'nearest'
+      behavior: "smooth",
+      block: "start",
     });
   }, [activeSection]);
 
@@ -114,7 +114,7 @@ export default function Home() {
     <>
       <nav className="absolute top-0 z-50 w-full">
         <div
-          className={`absolute sm:hidden top-0 bg-black/40 -z-50 w-full h-dvh ${
+          className={`absolute sm:hidden pointer-events-none top-0 bg-black/40 -z-50 w-full h-dvh ${
             isOpenMobileMenu ? "block" : "opacity-0"
           }`}
         />
@@ -182,7 +182,7 @@ export default function Home() {
                         id={section.id}
                         onClick={() => setActiveSection(section.id)}
                         className={cn(
-                          "cursor-pointer font-dosis tracking-widest font-medium px-3 py-2 text-xl text-white hover:text-primary/80",
+                          "cursor-pointer font-dosis tracking-widest font-medium px-3 py-2 text-2xl text-white hover:text-primary/80",
                           activeSection === section.id &&
                             "text-primary hover:text-primary"
                         )}
@@ -237,8 +237,8 @@ export default function Home() {
             <h1 className="text-4xl md:text-5xl text-white uppercase leading-tight mb-4 font-dosis tracking-widest text-shadow-[0px_0px_10px_rgba(0,0,0,0.6)]">
               Orkestar <span className="text-primary">Veljka Vasiljkovića</span>
             </h1>
-            <p className="text-lg text-white mb-8">
-              ZVUK TRUBE KAO TRADICIJA MODERNOG DOBA
+            <p className="text-lg uppercase text-white mb-8 px-4">
+              Očuvanje trubačke tradicije u savremenom dobu
             </p>
             <VideoPlayOverlay />
           </div>
@@ -266,18 +266,18 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="min-h-[300px] parallax grayscale bg-[url(/images/parallax1.webp)]" />
+        <div className="min-h-[300px] hidden sm:block parallax grayscale bg-[url(/images/parallax1.webp)]" />
 
         <section className="py-20 bg-black">
           <div className="container mx-auto px-6 text-white">
             <h2 className="text-3xl md:text-5xl uppercase text-center text-primary font-bold mb-5">
-              Muzika koja pokreće svet!
+              Muzika koja ne poznaje granice!
             </h2>
-            <p className="text-center mb-8">
-              U vrtlogu dobrih vibracija upoznajte muziku Srbije i Balkana koja
-              ostavlja bez daha i reči, a
+            <p className="text-center mb-4">
+              U ritmu pozitivnih vibracija doživite muziku Balkana i Srbije -
+              zvukove koji oduzimaju dah, a
             </p>
-            <p className="text-center mb-8">
+            <p className="text-center italic mb-8">
               “Onde gde prestaju reči, onde počinje muzika”…
             </p>
             <div className="flex flex-wrap justify-center gap-10">
@@ -288,7 +288,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="min-h-[300px] parallax grayscale bg-[url(/images/parallax2.webp)]" />
+        <div className="min-h-[300px] hidden sm:block parallax grayscale bg-[url(/images/parallax2.webp)]" />
 
         <section id="#o_nama" className="bg-black">
           <div className="container relative flex flex-col md:flex-row mx-auto py-10 px-6">
@@ -300,18 +300,25 @@ export default function Home() {
               <div className="mb-5 font-semibold text-primary text-sm uppercase">
                 Ukratko o nama
               </div>
-              <div>
-                Ako negde čujete melodije poznatih svetskih hitova, isprepletene
-                motivima srpske izvorne muzike, a sve sjajno ukomponovano u
-                jednu celinu, znaćete da je to Dejan Petrovic Big Band.
-                Prepoznatljivi zvuci truba, gitare i dobar “groove” su lična
-                karta ovog benda.
-              </div>
+              <p className="mb-2">
+                Mi smo Orkestar Veljka Vasiljkovića - spoj tradicije i
+                savremenog zvuka. Naša muzika kombinuje ritmove savremenih
+                hitova i autentične motive izvorne srpske muzike, stvarajući
+                energiju koja pokreće. Sviramo sa srcem, bilo da je reč o
+                svadbi, rođendanu, veselju, koncertu ili bilo kom posebnom
+                trenutku.
+              </p>
+              <p>
+                Truba je naš glas, ritam je naš pokretač, a zadovoljna publika -
+                naša najveća nagrada. Ako želite muziku koja ostavlja utisak i
+                diže atmosferu do vrhunca - tu smo. Pozovite nas i neka vaša
+                proslava zasvira punim glasom.
+              </p>
             </div>
           </div>
         </section>
 
-        <div className="min-h-[300px] parallax bg-[url(https://www.dejanpetrovic.com/wp-content/uploads/DSC474211.jpg)]" />
+        <div className="min-h-[300px] hidden sm:block parallax grayscale bg-[url(https://beogradtrubaci.com/logo/trubaci-beograd.jpg)]" />
 
         <section id="#galerija" className="py-20 bg-black">
           <div className="container mx-auto px-6">
@@ -324,7 +331,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {galleryImages.map((imgSrc) => (
                 <GalleryCard
                   onClick={() => setImagePreviewSrc(imgSrc)}
@@ -346,7 +353,7 @@ export default function Home() {
 
       <footer
         id="#kontakt"
-        className="relative bg-cover bg-[url(https://www.dejanpetrovic.com/wp-content/uploads/detail-trumpet-metal-instrument_150588-95.webp)]"
+        className="relative bg-cover bg-[url(https://music.utk.edu/wp-content/uploads/2023/05/jazz-header.jpeg)]"
       >
         <div className="bg-[#1A1A1A] opacity-50 size-full absolute top-0 pointer-events-none" />
 
@@ -360,7 +367,7 @@ export default function Home() {
               className="text-center font-bold font-sans text-4xl md:text-5xl mb-5"
               href="tel:+381631894031"
             >
-              063-189 40 31
+              063 189 40 31
             </a>
             <p className="text-center font-bold text-2xl mb-5">
               Za vrhunske proslave uz trubu
